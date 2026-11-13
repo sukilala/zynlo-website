@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "zynlo-lk",
+  // www.zynlo.lk is attached in the Cloudflare dashboard. Do not add routes or custom domains here.
+  "compatibility_date": "2026-11-13",
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.01
+    }
+  },
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page",
+    // /privacy and /terms are folder index files, served without a trailing slash.
+    "html_handling": "drop-trailing-slash"
+  }
+}

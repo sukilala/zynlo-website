@@ -1,0 +1,11 @@
+{
+  "name": "zynlo-website",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "preview": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.50.0"
+  }
+}
