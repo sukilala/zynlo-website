@@ -1,3 +1,9 @@
 /*
   Cache-Control: public, max-age=300
   X-Content-Type-Options: nosniff
+
+/*.ico
+  Content-Type: image/x-icon
+
+/*.webmanifest
+  Content-Type: application/manifest+json
