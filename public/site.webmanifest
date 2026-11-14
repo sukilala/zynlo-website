@@ -1,0 +1,27 @@
+{
+  "name": "Zynlo",
+  "short_name": "Zynlo",
+  "description": "Zynlo is a scalable human team for Sri Lankan businesses. 24/7 WhatsApp and call support so you never miss a customer enquiry again.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0f0818",
+  "background_color": "#0f0818",
+  "icons": [
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
