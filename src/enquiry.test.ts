@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import { describe, it } from "node:test";
 import { enquiryText, validateEnquiry } from "./enquiry.ts";
+import worker from "./index.ts";
 
 const valid = {
   name: "Amelia Clarke",
@@ -73,5 +76,25 @@ describe("validateEnquiry", () => {
       assert.equal(result.value.message, typed);
       assert.equal(result.value.message.includes("\r"), false);
     }
+  });
+});
+
+describe("Content-Security-Policy", () => {
+  it("allows Cloudflare Web Analytics while keeping strict directives in sync", async () => {
+    const headersPath = path.resolve(import.meta.dirname, "../public/_headers");
+    const headersText = fs.readFileSync(headersPath, "utf8");
+    const match = headersText.match(/Content-Security-Policy:\s*(.+)/);
+    assert.ok(match, "public/_headers should define Content-Security-Policy");
+    const csp = match[1].trim();
+    assert.match(csp, /script-src 'self' https:\/\/static\.cloudflareinsights\.com;/);
+    assert.match(csp, /connect-src 'self' https:\/\/cloudflareinsights\.com;/);
+    assert.match(csp, /default-src 'self';/);
+    assert.match(csp, /frame-ancestors 'none';/);
+
+    const response = await worker.fetch(
+      new Request("https://www.zynlo.lk/api/enquiry", { method: "OPTIONS" }),
+      {} as Env,
+    );
+    assert.equal(response.headers.get("content-security-policy"), csp);
   });
 });
