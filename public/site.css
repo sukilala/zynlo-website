@@ -422,7 +422,7 @@ textarea { min-height: 7.5rem; resize: vertical; }
 input::placeholder, textarea::placeholder { color: var(--muted); }
 .form .btn-primary { width: 100%; padding: .85rem 1rem; margin-top: 1rem; }
 .form .btn-primary:disabled { opacity: .7; cursor: progress; transform: none; }
-.err { color: var(--danger); font-size: .9rem; font-weight: 600; margin-top: .75rem; }
+.form .err { color: var(--danger); font-size: .9rem; font-weight: 600; margin-top: .75rem; }
 .form-ok, .fallback {
   border-radius: 1rem;
   padding: 1rem;

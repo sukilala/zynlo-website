@@ -61,4 +61,17 @@ describe("validateEnquiry", () => {
     const result = validateEnquiry({ ...valid, message: "a".repeat(2001) });
     assert.equal(result.ok, false);
   });
+
+  it("accepts a 2,000-character message after form posts turn newlines into CRLF", () => {
+    const typed = Array.from({ length: 11 }, (_, index) => (index === 10 ? "b".repeat(190) : "a".repeat(180))).join("\n");
+    assert.equal(typed.length, 2000);
+    const posted = typed.replace(/\n/g, "\r\n");
+    assert.equal(posted.length, 2010);
+    const result = validateEnquiry({ ...valid, message: posted });
+    assert.equal(result.ok, true);
+    if (result.ok && !result.honeypot) {
+      assert.equal(result.value.message, typed);
+      assert.equal(result.value.message.includes("\r"), false);
+    }
+  });
 });

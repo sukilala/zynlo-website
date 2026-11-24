@@ -24,12 +24,12 @@ function cleanLine(value: string, max: number): string {
   return value.replace(/[\u0000-\u001F\u007F]/g, " ").replace(/\s+/g, " ").trim().slice(0, max);
 }
 
-function cleanMessage(value: string, max: number): string {
+function normalizeMessage(value: string): string {
   return value
     .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
-    .trim()
-    .slice(0, max);
+    .trim();
 }
 
 export function validateEnquiry(input: Record<string, string>): ValidationResult {
@@ -41,7 +41,7 @@ export function validateEnquiry(input: Record<string, string>): ValidationResult
   const email = cleanLine(input.email ?? "", 120).toLowerCase();
   const company = cleanLine(input.company ?? "", 120);
   const audience = cleanLine(input.audience ?? "", 20);
-  const message = cleanMessage(input.message ?? "", 2000);
+  const message = normalizeMessage(input.message ?? "");
 
   if (!name || !email || !company || !audience || !message) {
     return { ok: false, status: 400, error: "Please complete every field." };
@@ -52,7 +52,7 @@ export function validateEnquiry(input: Record<string, string>): ValidationResult
   if (!(audience in AUDIENCES)) {
     return { ok: false, status: 400, error: "Tell us whether you are a UK SME or an agency partner." };
   }
-  if ((input.message ?? "").trim().length > 2000) {
+  if (message.length > 2000) {
     return { ok: false, status: 400, error: "Please shorten the message to 2,000 characters." };
   }
 
