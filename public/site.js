@@ -1,4 +1,5 @@
 (function () {
+  document.documentElement.classList.add("js");
   var nav = document.getElementById("nav");
   if (nav) {
     var onScroll = function () {
@@ -28,6 +29,16 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") setMenu(false);
     });
+  }
+
+  var sticky = document.querySelector(".sticky");
+  var hero = document.querySelector(".hero");
+  if (sticky && hero) {
+    var syncSticky = function () {
+      sticky.classList.toggle("is-on", hero.getBoundingClientRect().bottom < 120);
+    };
+    syncSticky();
+    window.addEventListener("scroll", syncSticky, { passive: true });
   }
 
   var audit = document.getElementById("auditForm");
