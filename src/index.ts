@@ -2,11 +2,15 @@ import { enquiryText, validateEnquiry, type Enquiry } from "./enquiry.ts";
 
 const MAX_BODY = 20_000;
 
+const CONTENT_SECURITY_POLICY =
+  "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; upgrade-insecure-requests";
+
 const SECURITY = {
   "x-content-type-options": "nosniff",
   "referrer-policy": "no-referrer",
   "x-frame-options": "DENY",
   "cache-control": "no-store",
+  "content-security-policy": CONTENT_SECURITY_POLICY,
 };
 
 function log(outcome: string, extra: Record<string, string | number> = {}): void {
