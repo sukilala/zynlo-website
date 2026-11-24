@@ -7,7 +7,7 @@ The custom domain is attached in the Cloudflare dashboard. `wrangler.jsonc` does
 ## Pages
 
 - `/` brand hub, with routes to the two offers
-- `/uk` UK B2B appointment setting (pricing on request)
+- `/uk` UK B2B appointment setting (pricing discussed case by case)
 - `/sl` Sri Lanka 24/7 WhatsApp and call support
 - `/privacy`, `/terms`
 - `/signature-logo.png` logo for an email signature (`https://www.zynlo.lk/signature-logo.png`)
