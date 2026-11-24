@@ -1,8 +1,12 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "zynlo-lk",
+  "main": "src/index.ts",
+  // 2026-11-17 is the newest compatibility date the installed Wrangler workerd accepts.
   // www.zynlo.lk is attached in the Cloudflare dashboard. Do not add routes or custom domains here.
-  "compatibility_date": "2026-11-13",
+  // Apex zynlo.lk should 301 to www.zynlo.lk in the dashboard (Bulk Redirects or a redirect rule), not in this file.
+  // RESEND_API_KEY is a Worker secret, not a var: npx wrangler secret put RESEND_API_KEY
+  "compatibility_date": "2026-11-17",
   "observability": {
     "enabled": true,
     "logs": {
@@ -14,10 +18,16 @@
       "head_sampling_rate": 0.01
     }
   },
+  "vars": {
+    "ENQUIRY_TO": "hello@zynlo.lk",
+    "ENQUIRY_FROM": "Zynlo Website <hello@zynlo.lk>"
+  },
   "assets": {
     "directory": "./public",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    // /privacy and /terms are folder index files, served without a trailing slash.
-    "html_handling": "drop-trailing-slash"
+    // /uk, /sl, /privacy and /terms are folder index files, served without a trailing slash.
+    "html_handling": "drop-trailing-slash",
+    "run_worker_first": ["/api/*"]
   }
 }

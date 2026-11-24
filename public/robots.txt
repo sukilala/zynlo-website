@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 Disallow: /CRM
 
 Sitemap: https://www.zynlo.lk/sitemap.xml

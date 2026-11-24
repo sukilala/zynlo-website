@@ -1,11 +1,17 @@
 {
   "name": "zynlo-website",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "wrangler dev",
-    "preview": "wrangler dev"
+    "preview": "wrangler dev",
+    "test": "node --test src/enquiry.test.ts",
+    "types": "wrangler types",
+    "check": "wrangler types --check && tsc --noEmit"
   },
   "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^5.9.3",
     "wrangler": "^4.50.0"
   }
 }

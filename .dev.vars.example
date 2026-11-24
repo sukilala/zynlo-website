@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local enquiry sends. Never commit .dev.vars.
+# Create a key at https://resend.com and verify the zynlo.lk domain so
+# ENQUIRY_FROM (Zynlo Website <hello@zynlo.lk>) is allowed to send.
+# RESEND_API_KEY=re_your_key_here
